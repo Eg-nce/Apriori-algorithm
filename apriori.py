@@ -1,3 +1,11 @@
+from itertools import combinations 
+from collections import defaultdict
+import pandas as pd
+import itertools
+import math
+import numpy as np
+
+
 class apriori:
   def __init__(self,Data, Minsup , Confidence):
     self.data = Data
