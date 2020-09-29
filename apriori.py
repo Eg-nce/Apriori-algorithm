@@ -88,7 +88,6 @@ class apriori:
     return  candicates 
 
 
-
   def __Counter(self):
     data , single = self.__data_pre() 
     candicates  = self.__sorter()
@@ -116,8 +115,6 @@ class apriori:
          break
         
     return  dic 
-
-
   
   def __Minsup_Terminator(self):
     data, single = self.__data_pre()
@@ -137,11 +134,7 @@ class apriori:
     j = 0
     i = 0
     confidence_list = []
-    if len(minsup_list) == 0 :
-      return print("minumum supports and confidences does not exist !!!\n try decrease minsup or confidence rate")
 
-
-  
     for x in minsup_list.keys():
       set_list.append(set(x))
     while True:
@@ -189,9 +182,6 @@ class apriori:
    
         
     return confidence_list
-            
-  
-
    
   def Miner(self):
     minsup_list = self.__Minsup_Terminator()
