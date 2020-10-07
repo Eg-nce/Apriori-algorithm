@@ -92,7 +92,7 @@ class apriori:
     data , single = self.__data_pre() 
     candicates  = self.__sorter()
     dic = self.__ItemDatas()
-    deneme = []
+ 
     s1 = 0
     s2 = 0
 
