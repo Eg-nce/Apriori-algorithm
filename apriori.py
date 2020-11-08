@@ -17,7 +17,6 @@ class apriori:
   def __data_pre(self):
      s1 ={}
      self.pre_data = self.data
-     CleanData = []
      try:
            self.data =  self.data.applymap(str.lower)
      except:
