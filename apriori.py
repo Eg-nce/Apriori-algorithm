@@ -1,3 +1,4 @@
+import time
 from itertools import combinations 
 from collections import defaultdict
 import pandas as pd
@@ -121,7 +122,7 @@ class apriori:
     Terminated_list = []
     s1 = {}
     for  gtx,rtx in dicni.items():
-       if rtx >= self.minsup:
+       if (rtx >= self.minsup) == True:
           s1.update({gtx : rtx})
 
     return s1 
@@ -183,11 +184,21 @@ class apriori:
     return confidence_list
    
   def Miner(self):
+    Frequency_list = []
     minsup_list = self.__Minsup_Terminator()
     liste , single = self.__data_pre() 
-    if len(minsup_list) == 0 :
+    if len(minsup_list) == 0 and len(single) == 0:
        raise TypeError("minimum support candidate and confidences does not exist !!!\n try decrease minsup or confidence rate")
-      
+    if len(minsup_list) == 0 and len(single) > 0:
+         Single_Minsup_Values = [ _ for _ in single.values()]
+         Single_Minsup = [tuple(((x,))) for x in single.keys()]
+         for var in range(len(Single_Minsup)):
+             if Single_Minsup_Values[var] >= self.minsup:
+                 Frequency_item = [  Single_Minsup[var] , 'frequency ===> %{}'.format("%.2f" %  ((Single_Minsup_Values[var] * 100 )/len(self.data))) ]
+                 Frequency_list.append(Frequency_item)
+         return    Frequency_list , []    
+             
+        
     Confidence_List = self.__confidence()
     Single_Minsup = [tuple(((x,))) for x in single.keys()]
     Single_Minsup_Values = [ _ for _ in single.values()]
@@ -196,7 +207,7 @@ class apriori:
     Multi_Minsup_Values = [ _ for _ in minsup_list.values()]
     var = 0
     var2 = 0
-    Frequency_list = []
+   
     while True:
         Frequency_item = [Multi_Minsup[var] , 'frequency ===> %{}'.format("%.2f" %  ((Multi_Minsup_Values[var] * 100 )/len(self.data))) ]
         Frequency_list.append(Frequency_item)
@@ -212,9 +223,4 @@ class apriori:
             if var2 == len(Single_Minsup_Values):
                 break     
           break 
-    return Frequency_list , Confidence_List
-
-
-
-         
-
+    return Frequency_list , Confidence_List 
