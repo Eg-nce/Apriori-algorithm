@@ -7,12 +7,19 @@ import math
 import numpy as np
 
 
+
 class apriori:
   def __init__(self,Data, Minsup , Confidence):
     self.data = Data
-  
+    self.minsup = Minsup
+    
+    if self.minsup > 100 or self.minsup <  0 :
+      raise TypeError ( "minsup rate must be between 0 - 100 ")
     self.minsup = int(math.ceil((Minsup*len(self.data.values.tolist()))/100))
     self.Main_dic = None
+    self.confidence_rate = Confidence
+    if self.confidence_rate  > 100 or self.confidence_rate  <  0 :
+      raise TypeError ( "confidence_rate  must be between 0 - 100 ")
     self.confidence_rate = float(Confidence/100)
   
   def __data_pre(self):
@@ -224,3 +231,4 @@ class apriori:
                 break     
           break 
     return Frequency_list , Confidence_List 
+
